@@ -9,3 +9,13 @@ class RegisterView(generics.CreateAPIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        access = response.data.get('access')
+        if access:
+            token = AccessToken(access)
+            response.data['birthdate'] = token.get('birthdate')
+        else:
+            response.data['birthdate'] = None
+        return response
