@@ -14,8 +14,6 @@ def generate_report_task(report_name=None):
 
 @shared_task
 def scheduled_cleanup_task():
-    # example for crontab scheduled task
-    # place cleanup logic here
     deleted = 0
     return {'deleted': deleted}
 
